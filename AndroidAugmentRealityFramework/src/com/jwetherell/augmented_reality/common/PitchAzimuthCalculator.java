@@ -49,7 +49,7 @@ public class PitchAzimuthCalculator {
 
         looking.set(0, 0, 0);
         rotationM.transpose();
-        looking.set(1, 0, 0);
+        looking.set(0, 1, 0);
         looking.prod(rotationM);
         looking.get(lookingArray);
         PitchAzimuthCalculator.azimuth = ((Utilities.getAngle(0, 0, lookingArray[0], lookingArray[2])  + 360 ) % 360);

@@ -61,10 +61,17 @@ public class Radar {
         ARData.setPitch(PitchAzimuthCalculator.getPitch());
         
         //Update the radar graphics and text based upon the new pitch and bearing
+        
+        canvas.save();
+        canvas.translate(10, 150);
+        canvas.rotate(-90);
+
         drawRadarCircle(canvas);
         drawRadarPoints(canvas);
         drawRadarLines(canvas);
         drawRadarText(canvas);
+        
+        canvas.restore();
     }
     
     private void drawRadarCircle(Canvas canvas) {
@@ -83,17 +90,9 @@ public class Radar {
         if (radarPoints==null) radarPoints = new PaintableRadarPoints();
         
         if (pointsContainer==null) 
-        	pointsContainer = new PaintablePosition( radarPoints, 
-                                                     PAD_X, 
-                                                     PAD_Y, 
-                                                     -ARData.getAzimuth(), 
-                                                     1);
+			pointsContainer = new PaintablePosition(radarPoints, PAD_X, PAD_Y, -ARData.getAzimuth(), 1);
         else 
-        	pointsContainer.set(radarPoints, 
-                    			PAD_X, 
-                    			PAD_Y, 
-                    			-ARData.getAzimuth(), 
-                    			1);
+			pointsContainer.set(radarPoints, PAD_X, PAD_Y, -ARData.getAzimuth(), 1);
         
         pointsContainer.paint(canvas);
     }
@@ -110,11 +109,7 @@ public class Radar {
             float leftX = leftRadarLine.getX()-(PAD_X+RADIUS);
             float leftY = leftRadarLine.getY()-(PAD_Y+RADIUS);
             PaintableLine leftLine = new PaintableLine(LINE_COLOR, leftX, leftY);
-            leftLineContainer = new PaintablePosition(  leftLine, 
-                                                        PAD_X+RADIUS, 
-                                                        PAD_Y+RADIUS, 
-                                                        0, 
-                                                        1);
+			leftLineContainer = new PaintablePosition(leftLine, PAD_X + RADIUS, PAD_Y + RADIUS, 0, 1);
         }
         leftLineContainer.paint(canvas);
         
@@ -127,11 +122,7 @@ public class Radar {
             float rightX = rightRadarLine.getX()-(PAD_X+RADIUS);
             float rightY = rightRadarLine.getY()-(PAD_Y+RADIUS);
             PaintableLine rightLine = new PaintableLine(LINE_COLOR, rightX, rightY);
-            rightLineContainer = new PaintablePosition( rightLine, 
-                                                        PAD_X+RADIUS, 
-                                                        PAD_Y+RADIUS, 
-                                                        0, 
-                                                        1);
+			rightLineContainer = new PaintablePosition(rightLine, PAD_X + RADIUS, PAD_Y + RADIUS, 0, 1);
         }
         rightLineContainer.paint(canvas);
     }

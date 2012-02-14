@@ -1,5 +1,6 @@
 package com.jwetherell.augmented_reality.activity;
 
+import java.lang.reflect.Array;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -95,8 +96,8 @@ public class SensorsActivity extends Activity implements SensorEventListener, Lo
             sensors = sensorMgr.getSensorList(Sensor.TYPE_MAGNETIC_FIELD);
             if (sensors.size() > 0) sensorMag = sensors.get(0);
 
-            sensorMgr.registerListener(this, sensorGrav, SensorManager.SENSOR_DELAY_NORMAL);
-            sensorMgr.registerListener(this, sensorMag, SensorManager.SENSOR_DELAY_NORMAL);
+            sensorMgr.registerListener(this, sensorGrav, SensorManager.SENSOR_DELAY_GAME);
+            sensorMgr.registerListener(this, sensorMag, SensorManager.SENSOR_DELAY_GAME);
 
             locationMgr = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             locationMgr.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME, MIN_DISTANCE, this);
@@ -213,11 +214,13 @@ public class SensorsActivity extends Activity implements SensorEventListener, Lo
             grav[0] = smooth[0];
             grav[1] = smooth[1];
             grav[2] = smooth[2];
+//        	System.arraycopy(evt.values, 0, grav, 0, 3);
         } else if (evt.sensor.getType() == Sensor.TYPE_MAGNETIC_FIELD) {
             smooth = LowPassFilter.filter(evt.values, mag);
             mag[0] = smooth[0];
             mag[1] = smooth[1];
             mag[2] = smooth[2];
+//        	System.arraycopy(evt.values, 0, mag, 0, 3);
         }
 
         //// Find real world position relative to phone location ////

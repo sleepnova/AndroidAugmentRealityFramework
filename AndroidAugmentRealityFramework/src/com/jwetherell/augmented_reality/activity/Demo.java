@@ -47,8 +47,8 @@ public class Demo extends AugmentedReality {
         super.onCreate(savedInstanceState);
 
         //Local
-//        LocalDataSource localData = new LocalDataSource(this.getResources());
-//        ARData.addMarkers(localData.getMarkers());
+        LocalDataSource localData = new LocalDataSource(this.getResources());
+        ARData.addMarkers(localData.getMarkers());
 
         //Network
 //        NetworkDataSource twitter = new TwitterDataSource(this.getResources());

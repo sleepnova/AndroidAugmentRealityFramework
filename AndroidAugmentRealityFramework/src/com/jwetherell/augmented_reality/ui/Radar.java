@@ -63,13 +63,13 @@ public class Radar {
         //Update the radar graphics and text based upon the new pitch and bearing
         
         canvas.save();
-        canvas.translate(10, 150);
+        canvas.translate(0, 150);
         canvas.rotate(-90);
 
         drawRadarCircle(canvas);
         drawRadarPoints(canvas);
         drawRadarLines(canvas);
-        drawRadarText(canvas);
+//        drawRadarText(canvas);
         
         canvas.restore();
     }
